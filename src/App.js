@@ -3,7 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import Populares from './PopularList';
 import Battle from './Battle';
-import { battle } from './GitHubApi';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import {
   BrowserRouter,
@@ -73,6 +72,7 @@ const Popular = () => {
     </div>
   );
 }
+
 class App extends Component {
   render() {
     return (

@@ -3,6 +3,12 @@ a{
   height: 100%;
   text-decoration: none;
 }
+li {
+  list-style-type: none;
+}
+ul {
+  padding: 0;
+}
 .home-container {
   display: flex;
   flex-direction: column;
@@ -45,4 +51,23 @@ a{
   margin: 10px;
   font-weight: 700;
   cursor: pointer;
+}
+.avatar {
+  width: 150px;
+}
+.popular-item {
+  margin: 20px;
+  text-align: center;
+}
+.popular-rank {
+  font-size: 20px;
+  margin: 10px;
+}
+.popular-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.space-list-items {
+  margin-bottom: 7px;
 }
