@@ -36,3 +36,13 @@ a{
   padding: 7px 0;
   margin: 10px auto;
 }
+
+.languages {
+  display: flex;
+  justify-content: center;
+}
+.languages li {
+  margin: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}

@@ -29,7 +29,7 @@ function handleError (error){
   return null;
 }
 
-function getUserData (player){
+export function getUserData (player){
   return axios.all([
     getProfile(player),
     getRepos(player)
@@ -49,7 +49,6 @@ function sortPlayers(players){
     return b.score - a.score;
   });
 }
-
 
 export function battle(players){
    return axios.all(players.map(getUserData))

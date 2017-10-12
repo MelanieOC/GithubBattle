@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { battle, fetchPopularRepos } from './GitHubApi';
+import {fetchPopularRepos } from './GitHubApi';
+import { Image } from 'react-bootstrap';
 
 class Populares extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class Populares extends Component {
     componentDidMount() {
         const lang = this.props.lang;
         fetchPopularRepos(lang).then((repos) => {
+            console.log(repos)
             this.setState(function () {
                 return {
                     repos: repos
@@ -22,7 +24,7 @@ class Populares extends Component {
         let mylist = null;
         if (this.state.repos != null)
             mylist = this.state.repos.map((repo, index) => {
-                return <li key={index} ><img src={repo.owner.avatar_url} alt={repo.name} /> </li>
+                return <li key={index} ><Image src={repo.owner.avatar_url} alt={repo.name} circle/> </li>
             });
         return (
             <div>

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Populares from './PopularList'
-import { Button, Navbar, Nav, MenuItem, NavItem, NavDropdown } from 'react-bootstrap';
+import Populares from './PopularList';
+import Battle from './Battle';
+import { battle } from './GitHubApi';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import {
   BrowserRouter,
   Route,
@@ -10,17 +12,17 @@ import {
   NavLink,
   Redirect
 } from 'react-router-dom';
-/*
-battle([
-  "MelanieOC", // https://github.com/ivanseidel
-  "Sharmyn28"]  // https://github.com/honcheng
+
+/*battle([
+  "melanieoc", // https://github.com/ivanseidel
+  "sharmyn28"]  // https://github.com/honcheng
 ).then((results) => {
   if (results === null) {
     console.log('Looks like there was an error!\nCheck that both users exist on github.');
   }
   console.log("battle result:", results[0], results[1]);
-});
-*/
+});*/
+
 const NavBar = () => {
   return (
     <Navbar inverse collapseOnSelect>
@@ -48,14 +50,27 @@ const Home = () => {
     </div>
   );
 }
-const Battle = () => {
-  return (
-    <h1>Battle</h1>
-  );
-}
+
 const Popular = () => {
   return (
-    <h1>Popular</h1>
+    <div>
+      <ul className='languages'>
+        <li>  <NavLink exact to="/popular/all"> All </NavLink> </li>
+        <li>  <NavLink to="/popular/javascript"> JavaScript </NavLink> </li>
+        <li>  <NavLink to="/popular/ruby"> Ruby </NavLink> </li>
+        <li>  <NavLink to="/popular/java"> Java </NavLink> </li>
+        <li>  <NavLink to="/popular/css"> CSS </NavLink> </li>
+        <li>  <NavLink to="/popular/python"> Python </NavLink> </li>
+      </ul>
+      <Route exact path="/popular"
+        render={() => <Redirect to="/popular/all" />} />
+      <Route path="/popular/all" render={() => <Populares lang={'All'} />} />
+      <Route path="/popular/javascript" render={() => <Populares lang={'Javascript'} />} />
+      <Route path="/popular/ruby" render={() => <Populares lang={'Ruby'} />} />
+      <Route path="/popular/java" render={() => <Populares lang={'Java'} />} />
+      <Route path="/popular/css" render={() => <Populares lang={'CSS'} />} />
+      <Route path="/popular/python" render={() => <Populares lang={'Python'} />} />
+    </div>
   );
 }
 class App extends Component {
