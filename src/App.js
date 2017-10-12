@@ -15,36 +15,9 @@ battle([
   console.log("battle result:", results[0], results[1]);
 });
 */
-class Populares extends Component {
-  constructor (props) {
-    super (props);
-    this.state = {
-      repos : null
-    };
-  }
-  componentDidMount(){
-    const lang = 'JavaScript';
-    fetchPopularRepos(lang).then((repos) => {
-      //console.log("repos:", repos);
-      this.setState(function () {
-        return {
-          repos: repos
-        }
-      });
-    });
-     
-  }
-}
-class App extends Component {
-  
-  render() {
-    //console.log(this.state.repos);
-    let mylist = null;
-    if (this.state.repos != null )
-      mylist = this.state.repos.map ( (repo, index) => {
-        return <li key = {index} >  {repo.name} </li>
-      } );
 
+class App extends Component {
+  render() {
     return (
       <div className="App">
         <header className="App-header">
@@ -54,18 +27,10 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        {
-          mylist && <ul>{mylist} </ul>
-         }
+        <Populares lang={'All'}/>
       </div>
     );
   }
 }
-/*<div>
-          {
-            this.state.repos.map(repo=>{
-              return <img src={repo.owner.avatar_url} alt={repo.name}/>
-            })
-          }
-        </div>*/
+
 export default App;
