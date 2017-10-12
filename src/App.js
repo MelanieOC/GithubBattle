@@ -32,9 +32,9 @@ const NavBar = () => {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
-          <NavItem eventKey={2}><NavLink to="/home">Home</NavLink></NavItem>
-          <NavItem eventKey={2}><NavLink to="/battle">Battle</NavLink></NavItem>
-          <NavItem eventKey={3}><NavLink to="/popular">Popular</NavLink></NavItem>
+          <NavItem eventKey={2}><NavLink className='navlink' to="/home">Home</NavLink></NavItem>
+          <NavItem eventKey={2}><NavLink className='navlink' to="/battle">Battle</NavLink></NavItem>
+          <NavItem eventKey={3}><NavLink className='navlink' to="/popular">Popular</NavLink></NavItem>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -42,7 +42,10 @@ const NavBar = () => {
 }
 const Home = () => {
   return (
-    <h1>Home</h1>
+    <div className='home-container'>
+      <h1> Github Battle: Battle your friends... and stuff.</h1>
+      <NavLink to="/battle" className='button'>Battle</NavLink>
+    </div>
   );
 }
 const Battle = () => {
