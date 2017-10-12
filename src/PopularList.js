@@ -1,3 +1,6 @@
+import React, { Component } from 'react';
+import { battle, fetchPopularRepos } from './GitHubApi';
+
 class Populares extends Component {
     constructor(props) {
       super(props);
@@ -8,7 +11,6 @@ class Populares extends Component {
     componentDidMount() {
       const lang = this.props.lang;
       fetchPopularRepos(lang).then((repos) => {
-        console.log("repos:", repos);
         this.setState(function () {
           return {
             repos: repos
@@ -31,3 +33,5 @@ class Populares extends Component {
       );
     }
   }
+
+  export default Populares;

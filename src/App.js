@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { battle, fetchPopularRepos } from './GitHubApi';
-
-
+import Populares from './PopularList'
+import { Button, Navbar, Nav, MenuItem, NavItem, NavDropdown } from 'react-bootstrap';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  NavLink,
+  Redirect
+} from 'react-router-dom';
 /*
 battle([
   "MelanieOC", // https://github.com/ivanseidel
@@ -15,20 +21,55 @@ battle([
   console.log("battle result:", results[0], results[1]);
 });
 */
-
+const NavBar = () => {
+  return (
+    <Navbar inverse collapseOnSelect>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <a href="#">GitHub-Battle</a>
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav>
+          <NavItem eventKey={2}><NavLink to="/home">Home</NavLink></NavItem>
+          <NavItem eventKey={2}><NavLink to="/battle">Battle</NavLink></NavItem>
+          <NavItem eventKey={3}><NavLink to="/popular">Popular</NavLink></NavItem>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+}
+const Home = () => {
+  return (
+    <h1>Home</h1>
+  );
+}
+const Battle = () => {
+  return (
+    <h1>Battle</h1>
+  );
+}
+const Popular = () => {
+  return (
+    <h1>Popular</h1>
+  );
+}
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Populares lang={'All'}/>
-      </div>
+      <BrowserRouter>
+        <div>
+          <NavBar />
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to={'/home'} />} />
+            <Route path="/home" render={() => <Home />} />
+            <Route path="/battle" render={() => <Battle />} />
+            <Route path="/popular" render={() => <Popular />} />
+            <Route render={() => <Redirect to={'/home'} />} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
