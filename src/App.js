@@ -12,16 +12,6 @@ import {
   Redirect
 } from 'react-router-dom';
 
-/*battle([
-  "melanieoc", // https://github.com/ivanseidel
-  "sharmyn28"]  // https://github.com/honcheng
-).then((results) => {
-  if (results === null) {
-    console.log('Looks like there was an error!\nCheck that both users exist on github.');
-  }
-  console.log("battle result:", results[0], results[1]);
-});*/
-
 const NavBar = () => {
   return (
     <Navbar inverse collapseOnSelect>
