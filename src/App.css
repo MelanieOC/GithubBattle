@@ -71,3 +71,8 @@ ul {
 .space-list-items {
   margin-bottom: 7px;
 }
+.header {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 200;
+}

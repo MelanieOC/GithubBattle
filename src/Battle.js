@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import { battle, getUserData } from './GitHubApi';
 import { Grid, Row, Col, FormControl, ControlLabel, FormGroup, Image } from 'react-bootstrap';
-/*import {
-    BrowserRouter,
-    Route,
-    Switch,
-    NavLink,
-    Redirect
-} from 'react-router-dom';*/
 
+const showRepo = ({ rank, state }) => {
+    return (
+        <div>
+            <h1 className='header'>{state}</h1>
+            <div style={{ textAlign='center' }}>
+                <h3>Score: {rank.score}</h3>
+                <Image className='avatar' src={rank.profile.avatar_url} circle />
+                <h2>@{rank.profile.login}</h2>
+            </div>
+            <ul className='space-list-items'>
+                {state === 'winner' && <li>{this.state.battle[0].profile.name}</li>}
+                <li>Followers: {rank.profile.followers}</li>
+                <li>Following: {rank.profile.following}</li>
+                <li>Public repos: {rank.profile.public_repos}</li>
+            </ul>
+        </div>
+    );
+}
 
 class User extends Component {
     constructor(props) {
@@ -28,16 +39,9 @@ class User extends Component {
         });
     }
     render() {
-        let usuario = null;
-        if (this.state.user != null) {
-            usuario = <Image className='avatar' src={this.state.user.profile.avatar_url} alt={this.state.user.profile.login} circle />;
-        }
         return (
             <div>
-                {
-                    usuario &&
-                    <div>{usuario}</div>
-                }
+                {this.state.user && <Image className='avatar' src={this.state.user.profile.avatar_url} alt={this.state.user.profile.login} circle />}
             </div>
         );
     }
@@ -67,8 +71,6 @@ class Battle extends Component {
                     check2: true
                 })
             }
-            console.log(this.user1);
-            console.log(this.user2);
         }
         const probando = () => {
             this.setState({
@@ -95,15 +97,17 @@ class Battle extends Component {
                     <Row>
                         <Col md={6} sm={6}>
                             {!this.state.check1 &&
-                                <FormGroup>
-                                    <ControlLabel>Player One</ControlLabel>
-                                    <FormControl
-                                        type="text"
-                                        placeholder="Github username"
-                                        onChange={(e) => { this.user1 = e.target.value }}
-                                    />
-                                    <button className='button' onClick={saveData}>Submit</button>
-                                </FormGroup>
+                                <div style={{ width: '500px' }}>
+                                    <FormGroup>
+                                        <ControlLabel className='header'>Player One</ControlLabel>
+                                        <FormControl
+                                            type="text"
+                                            placeholder="Github username"
+                                            onChange={(e) => { this.user1 = e.target.value }}
+                                        />
+                                        <button className='button' onClick={saveData}>Submit</button>
+                                    </FormGroup>
+                                </div>
                             }
                             {this.state.check1 &&
                                 <div>
@@ -115,7 +119,7 @@ class Battle extends Component {
                         <Col md={6} sm={6}>
                             {!this.state.check2 &&
                                 <FormGroup>
-                                    <ControlLabel>Player Two</ControlLabel>
+                                    <ControlLabel className='header'>Player Two</ControlLabel>
                                     <FormControl
                                         type="text"
                                         placeholder="Github username"
@@ -144,23 +148,10 @@ class Battle extends Component {
                         {this.state.battle &&
                             <Row>
                                 <Col md={6} sm={6}>
-                                    <p>Winner</p>
-                                    <p>Score: {this.state.battle[0].score}</p>
-                                    <Image className='avatar' src={this.state.battle[0].profile.avatar_url} circle />
-                                    <p>@{this.state.battle[0].profile.login}</p>
-                                    <p>Followers: {this.state.battle[0].profile.followers}</p>
-                                    <p>Following: {this.state.battle[0].profile.following}</p>
-                                    <p>Public repos: {this.state.battle[0].profile.public_repos}</p>
-
+                                    <showRepo rank={this.state.battle[0]} state={'winner'} />
                                 </Col>
                                 <Col md={6} sm={6}>
-                                    <p>Loser</p>
-                                    <p>Score: {this.state.battle[1].score}</p>
-                                    <Image className='avatar' src={this.state.battle[1].profile.avatar_url} circle />
-                                    <p>@{this.state.battle[1].profile.login}</p>
-                                    <p>Followers: {this.state.battle[1].profile.followers}</p>
-                                    <p>Following: {this.state.battle[1].profile.following}</p>
-                                    <p>Public repos: {this.state.battle[1].profile.public_repos}</p>
+                                    <showRepo rank={this.state.battle[1]} state={'loser'} />
                                 </Col>
                             </Row>
                         }
