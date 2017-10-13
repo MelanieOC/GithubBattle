@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { fetchPopularRepos } from './GitHubApi';
 import { Image } from 'react-bootstrap';
+import Loading from './Loading.js';
 
 const RespositorioView = ({ repo, rank }) => {
     return (
@@ -43,7 +44,7 @@ class Populares extends Component {
         return (
             <div>
                 {
-                    mylist ? <ul className='popular-list'>{mylist}</ul>:'Loading...'
+                    mylist ? <ul className='popular-list'>{mylist}</ul>:<Loading />
                 }
             </div>
         );

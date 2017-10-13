@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { battle, getUserData } from './GitHubApi';
 import { Grid, Row, Col, FormControl, ControlLabel, FormGroup, Image } from 'react-bootstrap';
+import Loading from './Loading.js';
 
-const showRepo = ({ rank, state }) => {
+const ShowRepo = ({ rank, win }) => {
     return (
         <div>
-            <h1 className='header'>{state}</h1>
-            <div style={{ textAlign='center' }}>
+            <h1 className='header'>{win}</h1>
+            <div style={{ textAlign:'center' }}>
                 <h3>Score: {rank.score}</h3>
                 <Image className='avatar' src={rank.profile.avatar_url} circle />
                 <h2>@{rank.profile.login}</h2>
             </div>
             <ul className='space-list-items'>
-                {state === 'winner' && <li>{this.state.battle[0].profile.name}</li>}
+                {win === 'winner' && <li>{rank.profile.name}</li>}
                 <li>Followers: {rank.profile.followers}</li>
                 <li>Following: {rank.profile.following}</li>
                 <li>Public repos: {rank.profile.public_repos}</li>
@@ -148,16 +149,14 @@ class Battle extends Component {
                         {this.state.battle &&
                             <Row>
                                 <Col md={6} sm={6}>
-                                    <showRepo rank={this.state.battle[0]} state={'winner'} />
+                                    <ShowRepo rank={this.state.battle[0]} win={'winner'} />
                                 </Col>
                                 <Col md={6} sm={6}>
-                                    <showRepo rank={this.state.battle[1]} state={'loser'} />
+                                    <ShowRepo rank={this.state.battle[1]} win={'loser'} />
                                 </Col>
                             </Row>
                         }
-                        {!this.state.battle &&
-                            <div>Loading...</div>
-                        }
+                        {!this.state.battle && <Loading />}
                     </div>
 
                 }
